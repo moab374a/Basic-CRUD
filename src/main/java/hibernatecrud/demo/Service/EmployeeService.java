@@ -1,15 +1,13 @@
-package hibernatecrud.demo.DAO;
+package hibernatecrud.demo.Service;
 
 import hibernatecrud.demo.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface EmployeeService {
     public List<Employee> findAll();
-
     public Employee findById(int theId);
     public void save(Employee theEmployee);
     public void deleteById(int theId);
-
 
 }
