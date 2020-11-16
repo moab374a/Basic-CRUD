@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -30,9 +31,9 @@ public class EmployeeRestController {
 
     // add mapping for get /employees/{employeeId}
     @GetMapping("/employees/{employeeId}")
-    public Employee getEmployee(@PathVariable int employeeId)
+    public Optional<Employee> getEmployee(@PathVariable int employeeId)
     {
-        Employee theEmployee = employeeService.findById(employeeId);
+        Optional<Employee> theEmployee = employeeService.findById(employeeId);
         if(theEmployee == null) throw new RuntimeException("Employee not Exsist");
 
         return theEmployee;
@@ -40,7 +41,7 @@ public class EmployeeRestController {
 
     // Add mapping for Post /employees - add new employee
 
-    @PostMapping("/employees/")
+    @PostMapping("/employees")
     public Employee addEmployee(@RequestBody Employee theEmployee)
     {
         //also just in case they pass an id in Json ... set id to 0
@@ -56,7 +57,7 @@ public class EmployeeRestController {
     @DeleteMapping("/employee/{employeeId}")
     public String deleteEmployee(@PathVariable int employeeId)
     {
-        Employee tempEmployee = employeeService.findById(employeeId);
+        Optional<Employee> tempEmployee = employeeService.findById(employeeId);
 
         //throw exception if null
         if(tempEmployee == null)
