@@ -1,4 +1,4 @@
-package hibernatecrud.demo.entity;
+package SpringDataRest.entity;
 
 import javax.persistence.*;
 
